@@ -2,6 +2,10 @@
 
 This project uses [@arcgis/map-components](https://developers.arcgis.com/map-components/), a set of web components for building mapping applications with the [ArcGIS Maps SDK for JavaScript](https://developers.arcgis.com/javascript/latest/). It uses [Vite](https://vitejs.dev/) for building a modern web application.
 
+## View Live
+
+https://sagewall.github.io/build-your-first-app-26/
+
 ## Project Structure
 
 ```
