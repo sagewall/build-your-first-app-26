@@ -7,7 +7,21 @@
     <title>build-your-first-app-26</title>
   </head>
   <body>
-    <div id="app"></div>
+    <calcite-shell>
+      <arcgis-map id="map" item-id="237b9584339446a0b56317b5962a4971">
+        <arcgis-layer-list
+          id="layer-list"
+          selection-mode="single"
+          show-collapse-button
+          show-heading
+          slot="top-right"
+        ></arcgis-layer-list>
+      </arcgis-map>
+      <arcgis-feature-table
+        id="feature-table"
+        reference-element="#map"
+      ></arcgis-feature-table>
+    </calcite-shell>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

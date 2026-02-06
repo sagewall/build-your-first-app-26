@@ -1,0 +1,155 @@
+{
+	"Map Item ID": {
+		"prefix": "dsItemId",
+		"body": [
+			"237b9584339446a0b56317b5962a4971"
+		],
+		"description": "Item ID for the parks and trails map"
+	},
+	"Backup Map Item ID": {
+		"prefix": "dsItemIdBackup",
+		"body": [
+			"ef2644781da844648e8bb30ab52a02bc"
+		],
+		"description": "Backup Item ID for the bigfoot and ufo map"
+	},
+	"ArcGIS Map": {
+		"prefix": "dsMapElement",
+		"body": [
+			"<arcgis-map",
+			"  id=\"map\"",
+			"  item-id=\"237b9584339446a0b56317b5962a4971\"",
+			"></arcgis-map>"
+		],
+		"description": "Insert an ArcGIS map with a layer list and legend"
+	},
+	"Import Map": {
+		"prefix": "dsMapImport",
+		"body": [
+			"import \"@arcgis/map-components/components/arcgis-map\";"
+		],
+		"description": "Import the Map component"
+	},
+	"HTML Body Styles": {
+		"prefix": "dsCSSHTMLBodyStyles",
+		"body": [
+			"html,",
+			"body {",
+			"  height: 100%;",
+			"  margin: 0;",
+			"}"
+		],
+		"description": "Snippet for ArcGIS map styles"
+	},
+	"Import Calcite Shell": {
+		"prefix": "dsCalciteShellImport",
+		"body": [
+			"import \"@esri/calcite-components/components/calcite-shell\";"
+		],
+		"description": "Import the calcite shell"
+	},
+	"Import Layer List": {
+		"prefix": "dsLayerListImport",
+		"body": [
+			"import \"@arcgis/map-components/components/arcgis-layer-list\";"
+		],
+		"description": "Import the Layer List component"
+	},
+	"Add Layer List": {
+		"prefix": "dsLayerListElement",
+		"body": [
+			"<arcgis-layer-list",
+			"  id=\"layer-list\"",
+			"  selection-mode=\"single\"",
+			"  show-collapse-button",
+			"  show-heading",
+			"  slot=\"top-right\"",
+			"></arcgis-layer-list>"
+		],
+		"description": "Insert an ArcGIS layer list"
+	},
+	"Get Layer List reference": {
+		"prefix": "dsGetLayerList",
+		"body": [
+			"// Get a reference to the layer list element",
+			"const layerList = document.getElementById(\"layer-list\");"
+		],
+		"description": "Get the layer list element"
+	},
+	"Layer List Selection Mode": {
+		"prefix": "dsSelectionMode",
+		"body": [
+			"// Set the selectionMode property to \"single\"",
+			"layerList.selectionMode = \"single\";"
+		],
+		"description": "Set the layer list selection mode"
+	},
+	"Import ArcGIS Feature Table": {
+		"prefix": "dsFeatureTableImport",
+		"body": [
+			"import \"@arcgis/map-components/components/arcgis-feature-table\";"
+		],
+		"description": "Snippet for importing ArcGIS Feature Table component"
+	},
+	"Add Feature Table": {
+		"prefix": "dsFeatureTableElement",
+		"body": [
+			"<arcgis-feature-table",
+			"  id=\"feature-table\"",
+			"  reference-element=\"#map\"",
+			"></arcgis-feature-table>"
+		],
+		"description": "Add a Feature Table"
+	},
+	"Map and Feature Table Styles": {
+		"prefix": "dsCSSMapFeatureTableStyles",
+		"body": [
+			"#map,",
+			"#feature-table {",
+			"  height: 50%;",
+			"}"
+		],
+		"description": "Insert styles for map and feature table"
+	},
+	"Get Feature Table reference": {
+		"prefix": "dsGetFeatureTable",
+		"body": [
+			"// Get a reference to the feature table element",
+			"const featureTable = document.getElementById(\"feature-table\");"
+		],
+		"description": "Get the feature table element"
+	},
+	"Import Reactive Utils": {
+		"prefix": "dsReactiveUtilsImport",
+		"body": [
+			"import * as reactiveUtils from \"@arcgis/core/core/reactiveUtils\";"
+		],
+		"description": "Import reactiveUtils from ArcGIS core"
+	},
+	"Setup the layer list": {
+		"prefix": "dsSetupLayerList",
+		"body": [
+			"// A function to watch the selected layer in the layer list",
+			"// and set the layer of the feature table to the selected layer",
+			"async function setupLayerList() {",
+			"  // Wait for the layer list component to be ready",
+			"  await layerList.componentOnReady();",
+			"  reactiveUtils.watch(",
+			"    // A function that returns the value to watch",
+			"    // In this case, the first selected item in the layer list",
+			"    () => layerList.selectedItems.getItemAt(0),",
+			"",
+			"    // A function that runs when the value above changes",
+			"    // In this case, set the layer of the feature table to the selected item's layer",
+			"    (item) => {",
+			"      featureTable.layer = item.layer;",
+			"    }",
+			"  );",
+			"}",
+			"",
+			"// Call the setupLayerList function to watch the selected layer in the layer list",
+			"setupLayerList();"
+		],
+		"description": "A function to watch the selected layer in the layer list and set the layer of the feature table to the selected layer"
+	}
+}
