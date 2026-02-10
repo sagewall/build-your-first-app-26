@@ -1,25 +1,23 @@
 {
 	"Map Item ID": {
-		"prefix": "dsItemId",
+		"prefix": "dsMapItemId",
 		"body": [
-			"237b9584339446a0b56317b5962a4971"
+			"46f660e84f5743538284e493bc7fa0e9"
 		],
 		"description": "Item ID for the parks and trails map"
 	},
 	"Backup Map Item ID": {
-		"prefix": "dsItemIdBackup",
+		"prefix": "dsBackupMapItemId",
 		"body": [
-			"ef2644781da844648e8bb30ab52a02bc"
+			"237b9584339446a0b56317b5962a4971"
 		],
-		"description": "Backup Item ID for the bigfoot and ufo map"
+		"description": "Backup Item ID for the tutorials map in case the primary item is unavailable"
 	},
-	"ArcGIS Map": {
-		"prefix": "dsMapElement",
+	"ArcGIS Map Component": {
+		"prefix": "dsMapComponent",
 		"body": [
-			"<arcgis-map",
-			"  id=\"map\"",
-			"  item-id=\"237b9584339446a0b56317b5962a4971\"",
-			"></arcgis-map>"
+			"<arcgis-map id=\"map-view\" item-id=\"46f660e84f5743538284e493bc7fa0e9\">",
+			"</arcgis-map>"
 		],
 		"description": "Insert an ArcGIS map with a layer list and legend"
 	},
@@ -29,6 +27,14 @@
 			"import \"@arcgis/map-components/components/arcgis-map\";"
 		],
 		"description": "Import the Map component"
+	},
+	"Map View DOM Reference": {
+		"prefix": "dsGetMapView",
+		"body": [
+			"// Reference to the 2D map view component",
+			"const mapViewElement = document.getElementById(\"map-view\");"
+		],
+		"description": "Reference the 2D map view DOM element by ID."
 	},
 	"HTML Body Styles": {
 		"prefix": "dsCSSHTMLBodyStyles",
@@ -71,10 +77,18 @@
 	"Get Layer List reference": {
 		"prefix": "dsGetLayerList",
 		"body": [
-			"// Get a reference to the layer list element",
+			"// Reference to the layer list component (for toggling and selecting layers)",
 			"const layerList = document.getElementById(\"layer-list\");"
 		],
-		"description": "Get the layer list element"
+		"description": "Reference for the layer list component"
+	},
+	"Layer List Component Ready": {
+		"prefix": "dsLayerListReady",
+		"body": [
+			"// Ensure the layer list component is fully loaded before interacting with it",
+			"await layerListElement.componentOnReady();"
+		],
+		"description": "Wait for the layer list component to be ready before interacting with it."
 	},
 	"Layer List Selection Mode": {
 		"prefix": "dsSelectionMode",
@@ -91,65 +105,215 @@
 		],
 		"description": "Snippet for importing ArcGIS Feature Table component"
 	},
-	"Add Feature Table": {
-		"prefix": "dsFeatureTableElement",
+	"Calcite Shell Imports": {
+		"prefix": "dsCalciteShellImports",
 		"body": [
-			"<arcgis-feature-table",
-			"  id=\"feature-table\"",
-			"  reference-element=\"#map\"",
-			"></arcgis-feature-table>"
+			"import \"@esri/calcite-components/components/calcite-shell\";",
+			"import \"@esri/calcite-components/components/calcite-shell-panel\";"
+		],
+		"description": "Import Calcite Shell and Shell Panel web components."
+	},
+	"Add Feature Table": {
+		"prefix": "dsFeatureTablePanel",
+		"body": [
+			"<calcite-shell-panel slot=\"panel-bottom\">",
+			"  <arcgis-feature-table",
+			"    id=\"feature-table\"",
+			"    reference-element=\"#map-view\"",
+			"  ></arcgis-feature-table>",
+			"</calcite-shell-panel>"
 		],
 		"description": "Add a Feature Table"
 	},
-	"Map and Feature Table Styles": {
-		"prefix": "dsCSSMapFeatureTableStyles",
+	"Feature Table Styles": {
+		"prefix": "dsCSSFeatureTableStyles",
 		"body": [
-			"#map,",
 			"#feature-table {",
-			"  height: 50%;",
+			"  height: 33vh;",
 			"}"
 		],
-		"description": "Insert styles for map and feature table"
+		"description": "Insert styles for feature table"
 	},
 	"Get Feature Table reference": {
 		"prefix": "dsGetFeatureTable",
 		"body": [
-			"// Get a reference to the feature table element",
+			"// Reference to the feature table component (for displaying layer attributes)",
 			"const featureTable = document.getElementById(\"feature-table\");"
 		],
-		"description": "Get the feature table element"
+		"description": "Reference to the feature table component"
 	},
 	"Import Reactive Utils": {
 		"prefix": "dsReactiveUtilsImport",
 		"body": [
-			"import * as reactiveUtils from \"@arcgis/core/core/reactiveUtils\";"
+			"import {watch} from \"@arcgis/core/core/reactiveUtils.js\";"
 		],
 		"description": "Import reactiveUtils from ArcGIS core"
 	},
-	"Setup the layer list": {
-		"prefix": "dsSetupLayerList",
+	"Watch Layer List Selection": {
+		"prefix": "dsLayerListSelectionWatch",
 		"body": [
-			"// A function to watch the selected layer in the layer list",
-			"// and set the layer of the feature table to the selected layer",
-			"async function setupLayerList() {",
-			"  // Wait for the layer list component to be ready",
-			"  await layerList.componentOnReady();",
-			"  reactiveUtils.watch(",
-			"    // A function that returns the value to watch",
-			"    // In this case, the first selected item in the layer list",
-			"    () => layerList.selectedItems.getItemAt(0),",
+			"// Watch for changes to the selected item in the layer list.",
+			"watch(",
+			"  // Returns the first selected item in the layer list (if any)",
+			"  () => layerListElement.selectedItems.getItemAt(0),",
 			"",
-			"    // A function that runs when the value above changes",
-			"    // In this case, set the layer of the feature table to the selected item's layer",
-			"    (item) => {",
+			"  // When the selected item changes, set the feature table's layer to match",
+			"  (item) => {",
+			"    if (item && item.layer) {",
 			"      featureTable.layer = item.layer;",
 			"    }",
-			"  );",
-			"}",
-			"",
-			"// Call the setupLayerList function to watch the selected layer in the layer list",
-			"setupLayerList();"
+			"  },",
+			");"
 		],
-		"description": "A function to watch the selected layer in the layer list and set the layer of the feature table to the selected layer"
+		"description": "Watch for changes to the selected item in the layer list and update the feature table's layer."
+	},
+	"ArcGIS Scene Import": {
+		"prefix": "dsSceneImport",
+		"body": [
+			"import \"@arcgis/map-components/components/arcgis-scene\";"
+		],
+		"description": "Import the ArcGIS Scene web component."
+	},
+	"ArcGIS Scene Component": {
+		"prefix": "dsSceneComponent",
+		"body": [
+			"<arcgis-scene",
+			"  id=\"scene-view\"",
+			"  item-id=\"119769168e2448b5bebffede8037565d\"",
+			"  hidden",
+			">",
+			"</arcgis-scene>"
+		],
+		"description": "Insert an ArcGIS Scene element with id, item-id, and hidden attributes."
+	},
+	"Scene View DOM Reference": {
+		"prefix": "dsGetSceneView",
+		"body": [
+			"// Reference to the 3D scene view component",
+			"const sceneViewElement = document.getElementById(\"scene-view\");"
+		],
+		"description": "Reference the 3D scene view DOM element by ID."
+	},
+	"ArcGIS Layer List Panel": {
+		"prefix": "dsArcgisLayerListPanel",
+		"body": [
+			"<calcite-shell-panel slot=\"panel-end\">",
+			"  <arcgis-layer-list",
+			"    id=\"layer-list\"",
+			"    selection-mode=\"single\"",
+			"    reference-element=\"#map-view\"",
+			"    show-collapse-button",
+			"    show-heading",
+			"  ></arcgis-layer-list>",
+			"</calcite-shell-panel>"
+		],
+		"description": "Insert a Calcite shell panel with an ArcGIS layer list (hardcoded)."
+	},
+	"Calcite Label Import": {
+		"prefix": "dsCalciteSwitchImport",
+		"body": [
+			"import \"@esri/calcite-components/components/calcite-label\";",
+			"import \"@esri/calcite-components/components/calcite-switch\";"
+		],
+		"description": "Import the Calcite Label and Switch web components."
+	},
+	"Calcite Header with Switch": {
+		"prefix": "dsCalciteHeaderSwitch",
+		"body": [
+			"<div id=\"header\" slot=\"header\">",
+			"  <h3>My First App</h3>",
+			"  <calcite-label layout=\"inline\">",
+			"    2D",
+			"    <calcite-switch id=\"view-switch\"></calcite-switch>",
+			"    3D",
+			"  </calcite-label>",
+			"</div>"
+		],
+		"description": "Insert a Calcite header with a label and a 3D scene toggle switch."
+	},
+	"Header Flex CSS": {
+		"prefix": "dsHeaderStyles",
+		"body": [
+			"#header {",
+			"  align-items: baseline;",
+			"  display: flex;",
+			"  flex-direction: row;",
+			"  justify-content: space-between;",
+			"  padding: 0 1rem;",
+			"}"
+		],
+		"description": "Flexbox styling for the #header element."
+	},
+	"Convert Viewpoint Function": {
+		"prefix": "dsConvertViewpointFunction",
+		"body": [
+			"// Converts the viewpoint between 2D map and 3D scene views",
+			"function convertViewpoint(viewElement) {",
+			"  // Clone the current viewpoint to avoid mutating the original",
+			"  const viewpoint = viewElement.viewpoint.clone();",
+			"",
+			"  // Get the latitude of the viewpoint's target geometry (in degrees)",
+			"  const latitude = viewpoint.targetGeometry.latitude;",
+			"",
+			"  // Calculate the scale adjustment factor for Web Mercator distortion:",
+			"  // In 2D maps, scale increases with latitude due to projection.",
+			"  // This factor keeps the scale visually consistent when switching views.",
+			"  const scaleConversionFactor = Math.cos((latitude * Math.PI) / 180);",
+			"",
+			"  // If switching from 2D map to 3D scene, apply scale correction.",
+			"  // If switching from 3D scene to 2D map, reverse the correction.",
+			"  if (viewElement.tagName.toLowerCase() === \"arcgis-map\") {",
+			"    viewpoint.scale *= scaleConversionFactor;",
+			"  } else if (viewElement.tagName.toLowerCase() === \"arcgis-scene\") {",
+			"    viewpoint.scale /= scaleConversionFactor;",
+			"  }",
+			"",
+			"  // Return the adjusted viewpoint",
+			"  return viewpoint;",
+			"}"
+		],
+		"description": "Function to convert viewpoint between 2D map and 3D scene views, adjusting scale for projection differences."
+	},
+	"View Switch DOM Reference": {
+		"prefix": "dsGetViewSwitch",
+		"body": [
+			"// Reference to the switch that toggles between map and scene views",
+			"const viewSwitch = document.getElementById(\"view-switch\");"
+		],
+		"description": "Reference the view switch DOM element by ID."
+	},
+	"View Switch Event Listener": {
+		"prefix": "dsViewSwitchEventListener",
+		"body": [
+			"// Handle toggling between 2D map and 3D scene views when the view switch is changed",
+			"viewSwitch.addEventListener(\"calciteSwitchChange\", () => {",
+			"  if (viewSwitch.checked) {",
+			"    // Switch to 3D scene view",
+			"    // Convert the current 2D map viewpoint for 3D",
+			"    const viewpoint = convertViewpoint(mapViewElement);",
+			"    sceneViewElement.viewpoint = viewpoint;",
+			"",
+			"    // Show the scene view and hide the map view",
+			"    mapViewElement.hidden = true;",
+			"    sceneViewElement.hidden = false;",
+			"",
+			"    // Update the layer list to reference the scene view",
+			"    layerListElement.referenceElement = sceneViewElement;",
+			"  } else {",
+			"    // Switch to 2D map view",
+			"    // Convert the current 3D scene viewpoint for 2D",
+			"    const viewpoint = convertViewpoint(sceneViewElement);",
+			"    mapViewElement.viewpoint = viewpoint;",
+			"",
+			"    // Show the map view and hide the scene view",
+			"    mapViewElement.hidden = false;",
+			"    sceneViewElement.hidden = true;",
+			"",
+			"    // Update the layer list to reference the map view",
+			"    layerListElement.referenceElement = mapViewElement;",
+			"  }",
+			"});"
+		],
+		"description": "Event listener to toggle between 2D map and 3D scene views using the view switch."
 	}
 }

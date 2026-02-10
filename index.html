@@ -8,19 +8,39 @@
   </head>
   <body>
     <calcite-shell>
-      <arcgis-map id="map" item-id="237b9584339446a0b56317b5962a4971">
+      <div id="header" slot="header">
+        <h3>My First App</h3>
+        <calcite-label layout="inline">
+          2D
+          <calcite-switch id="view-switch"></calcite-switch>
+          3D
+        </calcite-label>
+      </div>
+      <arcgis-map
+        id="map-view"
+        item-id="46f660e84f5743538284e493bc7fa0e9"
+      ></arcgis-map>
+      <arcgis-scene
+        id="scene-view"
+        item-id="119769168e2448b5bebffede8037565d"
+        hidden
+      >
+      </arcgis-scene>
+      <calcite-shell-panel slot="panel-end">
         <arcgis-layer-list
           id="layer-list"
           selection-mode="single"
+          reference-element="#map-view"
           show-collapse-button
           show-heading
-          slot="top-right"
         ></arcgis-layer-list>
-      </arcgis-map>
-      <arcgis-feature-table
-        id="feature-table"
-        reference-element="#map"
-      ></arcgis-feature-table>
+      </calcite-shell-panel>
+      <calcite-shell-panel slot="panel-bottom">
+        <arcgis-feature-table
+          id="feature-table"
+          reference-element="#map-view"
+        ></arcgis-feature-table>
+      </calcite-shell-panel>
     </calcite-shell>
     <script type="module" src="/src/main.js"></script>
   </body>

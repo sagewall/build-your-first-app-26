@@ -1,4 +1,11 @@
-#map,
 #feature-table {
-  height: 50%;
+  height: 33vh;
+}
+
+#header {
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 1rem;
 }
