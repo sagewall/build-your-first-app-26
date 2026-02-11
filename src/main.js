@@ -36,6 +36,10 @@ watch(
   (item) => {
     if (item && item.layer) {
       featureTable.layer = item.layer;
+      featureTable.tableTitle = item.layer.title;
+    } else {
+      featureTable.layer = null;
+      featureTable.tableTitle = "Select a layer in the layer list";
     }
   },
 );
@@ -54,6 +58,9 @@ viewSwitch.addEventListener("calciteSwitchChange", () => {
 
     // Update the layer list to reference the scene view
     layerListElement.referenceElement = sceneViewElement;
+
+    // Update the feature table's reference element to the scene view
+    featureTable.referenceElement = sceneViewElement;
   } else {
     // Switch to 2D map view
     // Convert the current 3D scene viewpoint for 2D
@@ -64,8 +71,11 @@ viewSwitch.addEventListener("calciteSwitchChange", () => {
     mapViewElement.hidden = false;
     sceneViewElement.hidden = true;
 
-    // Update the layer list to reference the map view
+    // Update the layer list's reference element to the map view
     layerListElement.referenceElement = mapViewElement;
+
+    // Update the feature table's reference element to the map view
+    featureTable.referenceElement = mapViewElement;
   }
 });
 
