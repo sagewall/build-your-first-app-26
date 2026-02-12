@@ -17,6 +17,7 @@
 		"prefix": "dsMapComponent",
 		"body": [
 			"<arcgis-map id=\"map-view\" item-id=\"46f660e84f5743538284e493bc7fa0e9\">",
+			"  <arcgis-zoom slot=\"top-left\"> </arcgis-zoom>",
 			"</arcgis-map>"
 		],
 		"description": "Insert an ArcGIS map with a layer list and legend"
@@ -24,7 +25,8 @@
 	"Import Map": {
 		"prefix": "dsMapImport",
 		"body": [
-			"import \"@arcgis/map-components/components/arcgis-map\";"
+			"import \"@arcgis/map-components/components/arcgis-map\";",
+			"import \"@arcgis/map-components/components/arcgis-zoom\";",
 		],
 		"description": "Import the Map component"
 	},
@@ -175,6 +177,8 @@
 	"ArcGIS Scene Import": {
 		"prefix": "dsSceneImport",
 		"body": [
+			"import \"@arcgis/map-components/components/arcgis-compass\";",
+			"import \"@arcgis/map-components/components/arcgis-navigation-toggle\";",
 			"import \"@arcgis/map-components/components/arcgis-scene\";"
 		],
 		"description": "Import the ArcGIS Scene web component."
@@ -187,6 +191,9 @@
 			"  item-id=\"119769168e2448b5bebffede8037565d\"",
 			"  hidden",
 			">",
+			"    <arcgis-zoom slot=\"top-left\"> </arcgis-zoom>",
+			"    <arcgis-navigation-toggle slot=\"top-left\"> </arcgis-navigation-toggle>",
+			"    <arcgis-compass slot=\"top-left\"> </arcgis-compass>",
 			"</arcgis-scene>"
 		],
 		"description": "Insert an ArcGIS Scene element with id, item-id, and hidden attributes."

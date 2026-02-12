@@ -1,8 +1,11 @@
 import { watch } from "@arcgis/core/core/reactiveUtils.js";
+import "@arcgis/map-components/components/arcgis-compass";
 import "@arcgis/map-components/components/arcgis-feature-table";
 import "@arcgis/map-components/components/arcgis-layer-list";
 import "@arcgis/map-components/components/arcgis-map";
+import "@arcgis/map-components/components/arcgis-navigation-toggle";
 import "@arcgis/map-components/components/arcgis-scene";
+import "@arcgis/map-components/components/arcgis-zoom";
 import "@esri/calcite-components/components/calcite-label";
 import "@esri/calcite-components/components/calcite-shell";
 import "@esri/calcite-components/components/calcite-shell-panel";
