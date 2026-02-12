@@ -7,7 +7,7 @@
     <title>build-your-first-app-26</title>
   </head>
   <body>
-    <calcite-shell>
+    <calcite-shell content-behind="true">
       <div id="header" slot="header">
         <h3>My First App</h3>
         <calcite-label layout="inline">
@@ -28,7 +28,7 @@
         <arcgis-navigation-toggle slot="top-left"> </arcgis-navigation-toggle>
         <arcgis-compass slot="top-left"> </arcgis-compass>
       </arcgis-scene>
-      <calcite-shell-panel slot="panel-end">
+      <calcite-shell-panel display-mode="float-content" slot="panel-end">
         <arcgis-layer-list
           id="layer-list"
           selection-mode="single"
@@ -37,13 +37,13 @@
           show-heading
         ></arcgis-layer-list>
       </calcite-shell-panel>
-      <calcite-shell-panel slot="panel-bottom">
+      <div slot="footer">
         <arcgis-feature-table
           id="feature-table"
           reference-element="#map-view"
           table-title="Select a layer in the layer list"
         ></arcgis-feature-table>
-      </calcite-shell-panel>
+      </div>
     </calcite-shell>
     <script type="module" src="/src/main.js"></script>
   </body>

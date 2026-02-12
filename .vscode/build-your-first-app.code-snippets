@@ -116,17 +116,32 @@
 		"description": "Import Calcite Shell and Shell Panel web components."
 	},
 	"Add Feature Table": {
-		"prefix": "dsFeatureTablePanel",
+		"prefix": "dsFeatureTableDiv",
 		"body": [
-			"<calcite-shell-panel slot=\"panel-bottom\">",
+			"<div slot=\"footer\">",
 			"  <arcgis-feature-table",
 			"    id=\"feature-table\"",
 			"    reference-element=\"#map-view\"",
 			"    table-title=\"Select a layer in the layer list\"",
 			"  ></arcgis-feature-table>",
-			"</calcite-shell-panel>"
+			"</div>"
 		],
 		"description": "Add a Feature Table"
+	},
+	"Move the layer list into a calcite shell panel": {
+		"prefix": "dsMoveLayerListToPanel",
+		"body": [
+			"<calcite-shell-panel display-mode=\"float-content\" slot=\"panel-end\">",
+			"  <arcgis-layer-list",
+			"    id=\"layer-list\"",
+			"    selection-mode=\"single\"",
+			"    reference-element=\"#map-view\"",
+			"    show-collapse-button",
+			"    show-heading",
+			"  ></arcgis-layer-list>",
+			"</calcite-shell-panel>"
+		],
+		"description": "Move the layer list into a calcite shell panel"
 	},
 	"Feature Table Styles": {
 		"prefix": "dsCSSFeatureTableStyles",
