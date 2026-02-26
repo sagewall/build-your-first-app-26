@@ -13,8 +13,8 @@
 		],
 		"description": "Backup Item ID for the tutorials map in case the primary item is unavailable"
 	},
-	"ArcGIS Map Component": {
-		"prefix": "dsMapComponent",
+	"ArcGIS Map Element": {
+		"prefix": "dsMapElement",
 		"body": [
 			"<arcgis-map id=\"map-view\" item-id=\"46f660e84f5743538284e493bc7fa0e9\">",
 			"  <arcgis-zoom slot=\"top-left\"> </arcgis-zoom>",
@@ -30,14 +30,6 @@
 		],
 		"description": "Import the Map component"
 	},
-	"Map View DOM Reference": {
-		"prefix": "dsGetMapView",
-		"body": [
-			"// Reference to the 2D map view component",
-			"const mapViewElement = document.getElementById(\"map-view\");"
-		],
-		"description": "Reference the 2D map view DOM element by ID."
-	},
 	"HTML Body Styles": {
 		"prefix": "dsCSSHTMLBodyStyles",
 		"body": [
@@ -48,13 +40,6 @@
 			"}"
 		],
 		"description": "Snippet for ArcGIS map styles"
-	},
-	"Import Calcite Shell": {
-		"prefix": "dsCalciteShellImport",
-		"body": [
-			"import \"@esri/calcite-components/components/calcite-shell\";"
-		],
-		"description": "Import the calcite shell"
 	},
 	"Import Layer List": {
 		"prefix": "dsLayerListImport",
@@ -100,13 +85,6 @@
 		],
 		"description": "Set the layer list selection mode"
 	},
-	"Import ArcGIS Feature Table": {
-		"prefix": "dsFeatureTableImport",
-		"body": [
-			"import \"@arcgis/map-components/components/arcgis-feature-table\";"
-		],
-		"description": "Snippet for importing ArcGIS Feature Table component"
-	},
 	"Calcite Shell Imports": {
 		"prefix": "dsCalciteShellImports",
 		"body": [
@@ -114,6 +92,28 @@
 			"import \"@esri/calcite-components/components/calcite-shell-panel\";"
 		],
 		"description": "Import Calcite Shell and Shell Panel web components."
+	},
+	"Move the layer list into a calcite shell panel": {
+		"prefix": "dsArcgisLayerListPanel",
+		"body": [
+			"<calcite-shell-panel display-mode=\"float-content\" slot=\"panel-end\">",
+			"  <arcgis-layer-list",
+			"    id=\"layer-list\"",
+			"    selection-mode=\"single\"",
+			"    reference-element=\"#map-view\"",
+			"    show-collapse-button",
+			"    show-heading",
+			"  ></arcgis-layer-list>",
+			"</calcite-shell-panel>"
+		],
+		"description": "Move the layer list into a calcite shell panel"
+	},
+	"Import ArcGIS Feature Table": {
+		"prefix": "dsFeatureTableImport",
+		"body": [
+			"import \"@arcgis/map-components/components/arcgis-feature-table\";"
+		],
+		"description": "Snippet for importing ArcGIS Feature Table component"
 	},
 	"Add Feature Table": {
 		"prefix": "dsFeatureTableDiv",
@@ -127,21 +127,6 @@
 			"</div>"
 		],
 		"description": "Add a Feature Table"
-	},
-	"Move the layer list into a calcite shell panel": {
-		"prefix": "dsMoveLayerListToPanel",
-		"body": [
-			"<calcite-shell-panel display-mode=\"float-content\" slot=\"panel-end\">",
-			"  <arcgis-layer-list",
-			"    id=\"layer-list\"",
-			"    selection-mode=\"single\"",
-			"    reference-element=\"#map-view\"",
-			"    show-collapse-button",
-			"    show-heading",
-			"  ></arcgis-layer-list>",
-			"</calcite-shell-panel>"
-		],
-		"description": "Move the layer list into a calcite shell panel"
 	},
 	"Feature Table Styles": {
 		"prefix": "dsCSSFeatureTableStyles",
@@ -221,20 +206,13 @@
 		],
 		"description": "Reference the 3D scene view DOM element by ID."
 	},
-	"ArcGIS Layer List Panel": {
-		"prefix": "dsArcgisLayerListPanel",
+	"Map View DOM Reference": {
+		"prefix": "dsGetMapView",
 		"body": [
-			"<calcite-shell-panel slot=\"panel-end\">",
-			"  <arcgis-layer-list",
-			"    id=\"layer-list\"",
-			"    selection-mode=\"single\"",
-			"    reference-element=\"#map-view\"",
-			"    show-collapse-button",
-			"    show-heading",
-			"  ></arcgis-layer-list>",
-			"</calcite-shell-panel>"
+			"// Reference to the 2D map view component",
+			"const mapViewElement = document.getElementById(\"map-view\");"
 		],
-		"description": "Insert a Calcite shell panel with an ArcGIS layer list (hardcoded)."
+		"description": "Reference the 2D map view DOM element by ID."
 	},
 	"Calcite Label Import": {
 		"prefix": "dsCalciteSwitchImport",
