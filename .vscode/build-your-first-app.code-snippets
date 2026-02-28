@@ -65,7 +65,7 @@
 		"prefix": "dsGetLayerList",
 		"body": [
 			"// Reference to the layer list component (for toggling and selecting layers)",
-			"const layerList = document.getElementById(\"layer-list\");"
+			"const layerListElement = document.getElementById(\"layer-list\");"
 		],
 		"description": "Reference for the layer list component"
 	},
@@ -94,17 +94,22 @@
 		"description": "Import Calcite Shell and Shell Panel web components."
 	},
 	"Move the layer list into a calcite shell panel": {
-		"prefix": "dsArcgisLayerListPanel",
+		"prefix": "dsCalciteShellWithLayerListPanel",
 		"body": [
-			"<calcite-shell-panel display-mode=\"float-content\" slot=\"panel-end\">",
-			"  <arcgis-layer-list",
-			"    id=\"layer-list\"",
-			"    selection-mode=\"single\"",
-			"    reference-element=\"#map-view\"",
-			"    show-collapse-button",
-			"    show-heading",
-			"  ></arcgis-layer-list>",
-			"</calcite-shell-panel>"
+			"<calcite-shell content-behind=\"true\">",
+			"  <arcgis-map id=\"map-view\" item-id=\"${2:46f660e84f5743538284e493bc7fa0e9}\">",
+			"    <arcgis-zoom slot=\"top-left\"> </arcgis-zoom>",
+			"  </arcgis-map>",
+			"  <calcite-shell-panel display-mode=\"float-content\" slot=\"panel-end\">",
+			"    <arcgis-layer-list",
+			"      id=\"layer-list\"",
+			"      selection-mode=\"single\"",
+			"      reference-element=\"#map-view\"",
+			"      show-collapse-button",
+			"      show-heading",
+			"    ></arcgis-layer-list>",
+			"  </calcite-shell-panel>",
+			"</calcite-shell>"
 		],
 		"description": "Move the layer list into a calcite shell panel"
 	},
@@ -198,23 +203,7 @@
 		],
 		"description": "Insert an ArcGIS Scene element with id, item-id, and hidden attributes."
 	},
-	"Scene View DOM Reference": {
-		"prefix": "dsGetSceneView",
-		"body": [
-			"// Reference to the 3D scene view component",
-			"const sceneViewElement = document.getElementById(\"scene-view\");"
-		],
-		"description": "Reference the 3D scene view DOM element by ID."
-	},
-	"Map View DOM Reference": {
-		"prefix": "dsGetMapView",
-		"body": [
-			"// Reference to the 2D map view component",
-			"const mapViewElement = document.getElementById(\"map-view\");"
-		],
-		"description": "Reference the 2D map view DOM element by ID."
-	},
-	"Calcite Label Import": {
+	"Calcite Label and Switch Imports": {
 		"prefix": "dsCalciteSwitchImport",
 		"body": [
 			"import \"@esri/calcite-components/components/calcite-label\";",
@@ -249,6 +238,20 @@
 		],
 		"description": "Flexbox styling for the #header element."
 	},
+	"Map, Scene and Switch References": {
+		"prefix": "dsGetMapSceneAndSwitch",
+		"body": [
+			"// Reference to the 2D map view component",
+			"const mapViewElement = document.getElementById(\"map-view\");",
+			"",
+			"// Reference to the 3D scene view component",
+			"const sceneViewElement = document.getElementById(\"scene-view\");",
+			"",
+			"// Reference to the switch that toggles between map and scene views",
+			"const viewSwitch = document.getElementById(\"view-switch\");"
+		],
+		"description": "References to the Map, Scene and Switch."
+	},
 	"Convert Viewpoint Function": {
 		"prefix": "dsConvertViewpointFunction",
 		"body": [
@@ -278,14 +281,6 @@
 			"}"
 		],
 		"description": "Function to convert viewpoint between 2D map and 3D scene views, adjusting scale for projection differences."
-	},
-	"View Switch DOM Reference": {
-		"prefix": "dsGetViewSwitch",
-		"body": [
-			"// Reference to the switch that toggles between map and scene views",
-			"const viewSwitch = document.getElementById(\"view-switch\");"
-		],
-		"description": "Reference the view switch DOM element by ID."
 	},
 	"View Switch Event Listener": {
 		"prefix": "dsViewSwitchEventListener",
