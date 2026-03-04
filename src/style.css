@@ -2,10 +2,7 @@
   height: 33vh;
 }
 
-#header {
-  align-items: baseline;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 1rem;
+#view-switch-label {
+  padding-right: 1rem;
+  --calcite-label-margin-bottom: 0;
 }

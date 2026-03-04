@@ -13,25 +13,27 @@
         height: 33vh;
       }
 
-      #header {
-        align-items: baseline;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 0 1rem;
+      #view-switch-label {
+        padding-right: 1rem;
+        --calcite-label-margin-bottom: 0;
       }
     </style>
   </head>
   <body>
     <calcite-shell content-behind="true">
-      <div id="header" slot="header">
-        <h3>My First App</h3>
-        <calcite-label layout="inline">
+      <calcite-navigation id="header" slot="header">
+        <calcite-navigation-logo slot="logo" heading="My First App">
+        </calcite-navigation-logo>
+        <calcite-label
+          id="view-switch-label"
+          layout="inline"
+          slot="content-end"
+        >
           2D
           <calcite-switch id="view-switch"></calcite-switch>
           3D
         </calcite-label>
-      </div>
+      </calcite-navigation>
       <arcgis-map id="map-view" item-id="46f660e84f5743538284e493bc7fa0e9">
         <arcgis-zoom slot="top-left"> </arcgis-zoom>
       </arcgis-map>

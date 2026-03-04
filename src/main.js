@@ -7,6 +7,8 @@ import "@arcgis/map-components/components/arcgis-navigation-toggle";
 import "@arcgis/map-components/components/arcgis-scene";
 import "@arcgis/map-components/components/arcgis-zoom";
 import "@esri/calcite-components/components/calcite-label";
+import "@esri/calcite-components/components/calcite-navigation";
+import "@esri/calcite-components/components/calcite-navigation-logo";
 import "@esri/calcite-components/components/calcite-shell";
 import "@esri/calcite-components/components/calcite-shell-panel";
 import "@esri/calcite-components/components/calcite-switch";

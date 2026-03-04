@@ -203,40 +203,44 @@
 		],
 		"description": "Insert an ArcGIS Scene element with id, item-id, and hidden attributes."
 	},
-	"Calcite Label and Switch Imports": {
-		"prefix": "dsCalciteSwitchImport",
+	"Calcite Navigation and Switch Imports": {
+		"prefix": "dsCalciteNavigationImports",
 		"body": [
+			"import \"@esri/calcite-components/components/calcite-navigation\";",
+			"import \"@esri/calcite-components/components/calcite-navigation-logo\";",
 			"import \"@esri/calcite-components/components/calcite-label\";",
 			"import \"@esri/calcite-components/components/calcite-switch\";"
 		],
 		"description": "Import the Calcite Label and Switch web components."
 	},
-	"Calcite Header with Switch": {
-		"prefix": "dsCalciteHeaderSwitch",
+	"Calcite Navigation With View Switch": {
+		"prefix": "dsCalciteNavigationElements",
+		"description": "Calcite navigation with logo and 2D/3D view switch in content-end slot",
 		"body": [
-			"<div id=\"header\" slot=\"header\">",
-			"  <h3>My First App</h3>",
-			"  <calcite-label layout=\"inline\">",
+			"<calcite-navigation id=\"header\" slot=\"header\">",
+			"  <calcite-navigation-logo slot=\"logo\" heading=\"${1:My First App}\">",
+			"  </calcite-navigation-logo>",
+			"  <calcite-label",
+			"    id=\"view-switch-label\"",
+			"    layout=\"inline\"",
+			"    slot=\"content-end\"",
+			"  >",
 			"    2D",
 			"    <calcite-switch id=\"view-switch\"></calcite-switch>",
 			"    3D",
 			"  </calcite-label>",
-			"</div>"
-		],
-		"description": "Insert a Calcite header with a label and a 3D scene toggle switch."
+			"</calcite-navigation>"
+		]
 	},
-	"Header Flex CSS": {
-		"prefix": "dsHeaderStyles",
+	"Calcite View Switch Label Styles": {
+		"prefix": "dsCalciteNavigationStyles",
+		"description": "Styles for Calcite view switch label spacing and vertical alignment",
 		"body": [
-			"#header {",
-			"  align-items: baseline;",
-			"  display: flex;",
-			"  flex-direction: row;",
-			"  justify-content: space-between;",
-			"  padding: 0 1rem;",
+			"#view-switch-label {",
+			"  padding-right: 1rem;",
+			"  --calcite-label-margin-bottom: 0;",
 			"}"
-		],
-		"description": "Flexbox styling for the #header element."
+		]
 	},
 	"Map, Scene and Switch References": {
 		"prefix": "dsGetMapSceneAndSwitch",
