@@ -36,10 +36,10 @@ watch(
   () => layerListElement.selectedItems.getItemAt(0),
 
   // When the selected item changes, set the feature table's layer to match
-  (item) => {
-    if (item && item.layer) {
-      featureTable.layer = item.layer;
-      featureTable.tableTitle = item.layer.title;
+  (selectedItem) => {
+    if (selectedItem && selectedItem.layer) {
+      featureTable.layer = selectedItem.layer;
+      featureTable.tableTitle = selectedItem.layer.title;
     } else {
       featureTable.layer = null;
       featureTable.tableTitle = "Select a layer in the layer list";

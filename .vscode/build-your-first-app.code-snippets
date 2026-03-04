@@ -35,7 +35,7 @@
 		"body": [
 			"html,",
 			"body {",
-			"  height: 100%;",
+			"  height: 100vh;",
 			"  margin: 0;",
 			"}"
 		],
@@ -151,11 +151,11 @@
 		"description": "Reference to the feature table component"
 	},
 	"Import Reactive Utils": {
-		"prefix": "dsReactiveUtilsImport",
+		"prefix": "dsWatchImport",
 		"body": [
 			"import {watch} from \"@arcgis/core/core/reactiveUtils.js\";"
 		],
-		"description": "Import reactiveUtils from ArcGIS core"
+		"description": "Import watch from reactiveUtils"
 	},
 	"Watch Layer List Selection": {
 		"prefix": "dsLayerListSelectionWatch",
@@ -166,10 +166,10 @@
 			"  () => layerListElement.selectedItems.getItemAt(0),",
 			"",
 			"  // When the selected item changes, set the feature table's layer to match",
-			"  (item) => {",
-			"    if (item && item.layer) {",
-			"      featureTable.layer = item.layer;",
-			"      featureTable.tableTitle = item.layer.title;",
+			"  (selectedItem) => {",
+			"    if (selectedItem && selectedItem.layer) {",
+			"      featureTable.layer = selectedItem.layer;",
+			"      featureTable.tableTitle = selectedItem.layer.title;",
 			"    } else {",
 			"      featureTable.layer = null;",
 			"      featureTable.tableTitle = \"Select a layer in the layer list\";",
@@ -189,7 +189,7 @@
 		"description": "Import the ArcGIS Scene web component."
 	},
 	"ArcGIS Scene Component": {
-		"prefix": "dsSceneComponent",
+		"prefix": "dsSceneElement",
 		"body": [
 			"<arcgis-scene",
 			"  id=\"scene-view\"",
